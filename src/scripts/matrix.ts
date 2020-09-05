@@ -5,7 +5,7 @@ class Matrix {
 		this.cols = c;
 	}
 
-	private m: number[][];
+	private readonly m: number[][];
 	public readonly rows: number;
 	public readonly cols: number;
 
@@ -26,7 +26,7 @@ class Matrix {
 		return result;
 	}
 
-	public turn(): Matrix {
+	public transpose(): Matrix {
 		const result = Matrix.createNull(this.cols, this.rows);
 
 		for (let r = 0; r < this.rows; r++) {

@@ -62,7 +62,7 @@ export class Animator {
 
 		for (let f = 0; f < framecount; f++) {
 			this.canvas.clear();
-			this.shape.draw(this.canvas, next);
+			this.shape.draw(this.canvas, start);
 			next = Matrix.add(next, unit);
 
 			await Task.delay(waitframe);
