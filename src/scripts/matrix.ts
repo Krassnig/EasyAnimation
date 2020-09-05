@@ -1,16 +1,14 @@
 class Matrix {
 	private constructor(m: number[][], r: number, c: number) {
 		this.m = m;
-		this._rows = r;
-		this._cols = c;
+		this.rows = r;
+		this.cols = c;
 	}
 
 	private m: number[][];
-	private _rows: number;
-	private _cols: number;
-
-	public get rows(): number { return this._rows; }
-	public get cols(): number { return this._cols; }
+	private readonly rows: number;
+	private readonly cols: number;
+	
 	public get(row: number, col: number) {
 		return this.m[row][col];
 	}
@@ -95,6 +93,16 @@ class Matrix {
 			}
 		}
 		return new Matrix(m, rows, cols);
+	}
+
+	public static createIdentity(size: number) {
+		const result = Matrix.createNull(size, size);
+
+		for (let i = 0; i < size; i++) {
+			result.m[i][i] = 1;
+		}
+
+		return result;
 	}
 }
 
