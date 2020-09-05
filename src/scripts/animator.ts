@@ -50,7 +50,7 @@ export class Animator {
 	}
 
 	public async finalize(): Promise<void> {
-
+		await this.doStep(this.shape.toMatrix(), this.tstack[0]);
 	}
 
 	private async doStep(start: Matrix, step: [Matrix, number]): Promise<Matrix> {
