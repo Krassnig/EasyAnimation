@@ -13,10 +13,13 @@ class Canvas {
 		return new Promise<Canvas>(e => window.onload = () => {
 			const canvas = document.createElement('canvas');
 			
+			canvas.innerHTML = 'Please enable javascript and canvas';
 			canvas.setAttribute('width', '800');
 			canvas.setAttribute('height', '800');
 			canvas.setAttribute('id', 'canvas');
 			canvas.setAttribute('class', 'canvas');
+
+			document.body.appendChild(canvas);
 
 			const c = canvas.getContext('2d');
 
