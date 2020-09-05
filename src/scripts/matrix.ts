@@ -26,6 +26,18 @@ class Matrix {
 		return result;
 	}
 
+	public turn(): Matrix {
+		const result = Matrix.createNull(this.cols, this.rows);
+
+		for (let r = 0; r < this.rows; r++) {
+			for (let c = 0; c < this.cols; c++) {
+				result.m[c][r] = this.m[r][c];
+			}
+		}
+
+		return result;
+	}
+
 	public toString = (): string => {
 		return '[' + this.m.map(a => '[' + a.join(',') + ']').join(', ') + ']';
 	}
