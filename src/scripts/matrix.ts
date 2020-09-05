@@ -8,7 +8,7 @@ class Matrix {
 	private m: number[][];
 	private readonly rows: number;
 	private readonly cols: number;
-	
+
 	public get(row: number, col: number) {
 		return this.m[row][col];
 	}
@@ -64,6 +64,18 @@ class Matrix {
 				for (let i = 0; i < a.cols; i++) {
 					result.m[ar][bc] += a.m[ar][i] * b.m[i][bc];
 				}
+			}
+		}
+
+		return result;
+	}
+
+	public static div(m: Matrix, k: number): Matrix {
+		const result = Matrix.createNull(m.rows, m.cols);
+
+		for (let r = 0; r < m.rows; r++) {
+			for (let c = 0; c < m.cols; c++) {
+				result.m[r][c] = m.m[r][c] / k;
 			}
 		}
 
