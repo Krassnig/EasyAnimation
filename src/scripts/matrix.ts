@@ -26,6 +26,10 @@ class Matrix {
 		return result;
 	}
 
+	public toString = (): string => {
+		return '[' + this.m.map(a => '[' + a.join(',') + ']').join(', ') + ']';
+	}
+
 	public static add(m1: Matrix, m2: Matrix): Matrix {
 		if (m1.rows !== m2.rows || m1.cols !== m2.cols) throw new Error('Matrices are not the same size.');
 

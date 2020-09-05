@@ -57,12 +57,13 @@ export class Animator {
 		const framecount = step[1] * Config.frameRate;
 		const waitframe = 1000 / Config.frameRate;
 
-		const unit = Matrix.div(step[0], framecount);
+		const unit = Matrix.div(Matrix.sub(Matrix.mult(start, step[0]), start), framecount);
 		let next = start;
 
 		for (let f = 0; f < framecount; f++) {
+			this.canvas.clear();
 			this.shape.draw(this.canvas, next);
-			next = Matrix.mult(next, unit);
+			next = Matrix.add(next, unit);
 
 			await Task.delay(waitframe);
 		}
