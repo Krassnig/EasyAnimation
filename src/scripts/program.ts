@@ -1,5 +1,11 @@
+import Canvas from "./canvas";
+
 export class Program {
-	public static main(args: string[]): void {
-		console.log('Hello World!');
+	public static async main(args: string[]): Promise<void> {
+		
+		const c = await Canvas.create();
+
+		c.testRect();
+
 	}
 }
