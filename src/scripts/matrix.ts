@@ -6,8 +6,8 @@ class Matrix {
 	}
 
 	private m: number[][];
-	private readonly rows: number;
-	private readonly cols: number;
+	public readonly rows: number;
+	public readonly cols: number;
 
 	public get(row: number, col: number) {
 		return this.m[row][col];
@@ -16,8 +16,8 @@ class Matrix {
 	public normalize(): Matrix {
 		const result = Matrix.createNull(this.rows + 1, this.cols + 1);
 
-		for (let r = 0; r < result.rows; r++) {
-			for (let c = 0; c < result.cols; c++) {
+		for (let r = 0; r < this.rows; r++) {
+			for (let c = 0; c < this.cols; c++) {
 				result.m[r][c] = this.m[r][c];
 			}
 		}
