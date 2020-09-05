@@ -1,0 +1,25 @@
+{
+  "name": "easy-animation",
+  "version": "1.0.0",
+  "description": "easy-animation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krassnig/easy-animation.git"
+  },
+  "keywords": [],
+  "author": "Krassnig, Kasyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krassnig/easy-animation/issues"
+  },
+  "homepage": "https://github.com/Krassnig/easy-animation#readme",
+  "devDependencies": {
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
