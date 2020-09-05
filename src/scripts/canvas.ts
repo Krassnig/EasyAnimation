@@ -1,13 +1,8 @@
 class Canvas {
 	private constructor(
-		private canvas: HTMLCanvasElement,
-		private c: CanvasRenderingContext2D
+		public readonly canvas: HTMLCanvasElement,
+		public readonly c: CanvasRenderingContext2D
 	) { }
-
-	public testRect(): void {
-		this.c.fillStyle = '#000000';
-		this.c.fillRect(100, 100, 100, 100);
-	}
 
 	public static async create(): Promise<Canvas> {
 		return new Promise<Canvas>(e => window.onload = () => {
