@@ -5,19 +5,22 @@ import Matrix from "../matrix";
 
 export class Polygon implements Shape {
     toMatrix(): Matrix {
-        return Matrix.createNull(0, 0);
+        return Matrix.create(this._points).normalize();
     }
 
     draw(canvas: Canvas, matrix: Matrix): void {
         const ctx = canvas.c;
         ctx.fillStyle = Config.color;
         ctx.beginPath();
-        const startPoint = this._points[0];
-        ctx.moveTo(startPoint[0], startPoint[1]);
-        for (let i = 1; i < this._points.length; i++) {
+        const startPoint = matrix;
+        ctx.moveTo(matrix.get(0, 0), matrix.get(1, 0));
+        for (let i = 1; i < matrix.cols; i++) {
+            ctx.lineTo(matrix.get(0, i), matrix.get(1, i));
+        }
+/*        for (let i = 1; i < this._points.length; i++) {
             const point1 = this._points[i];
             ctx.lineTo(point1[0], point1[1]);
-        }
+        }*/
         ctx.closePath();
         ctx.stroke();
     }
