@@ -1,22 +1,25 @@
 import Canvas, {Drawable} from "../canvas";
 import {Config} from "../config";
+import Shape from "./shape";
+import Matrix from "../matrix";
 
-export class Polygon implements Drawable {
+export class Polygon implements Shape {
+    toMatrix(): Matrix {
+        return Matrix.createNull(0, 0);
+    }
 
-    draw(canvas: Canvas): void {
+    draw(canvas: Canvas, matrix: Matrix): void {
         const ctx = canvas.c;
         ctx.fillStyle = Config.color;
         ctx.beginPath();
         const startPoint = this._points[0];
         ctx.moveTo(startPoint[0], startPoint[1]);
         for (let i = 1; i < this._points.length; i++) {
-            const point1 = this._points;
+            const point1 = this._points[i];
+            ctx.lineTo(point1[0], point1[1]);
         }
-        ctx.lineTo(100,50);
-        ctx.lineTo(50, 100);
-        ctx.lineTo(0, 90);
         ctx.closePath();
-        ctx.fill();
+        ctx.stroke();
     }
 
     constructor(points: [number, number][]) {
