@@ -44,25 +44,29 @@ export class Animator {
 		return this;
 	}
 
-	public animate(seconds: number): void {
+	public animate(seconds: number): Animator {
 		this.tstack.push([this.mnext, seconds]);
 		this.mnext = Matrix.createIdentity(3);
+		return this;
 	}
 
-	public async finalize(): Promise<void> {
-		await this.doStep(this.shape.toMatrix(), this.tstack[0]);
+	public async finalize(): Promise<Animator> {
+		await this.doStep(this.shape.toVectorList(), this.tstack[0]);
+		return this;
 	}
 
 	private async doStep(start: Matrix, step: [Matrix, number]): Promise<Matrix> {
 		const framecount = step[1] * Config.frameRate;
 		const waitframe = 1000 / Config.frameRate;
 
-		const unit = Matrix.div(Matrix.sub(Matrix.mult(start, step[0]), start), framecount);
+		const a = Matrix.specialMult(step[0], start);
+		const b = Matrix.sub(a, start);
+		const unit = Matrix.div(b, framecount);
 		let next = start;
 
 		for (let f = 0; f < framecount; f++) {
 			this.canvas.clear();
-			this.shape.draw(this.canvas, start);
+			this.shape.draw(this.canvas, next);
 			next = Matrix.add(next, unit);
 
 			await Task.delay(waitframe);

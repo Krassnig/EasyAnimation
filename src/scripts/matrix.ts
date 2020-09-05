@@ -13,6 +13,22 @@ class Matrix {
 		return this.m[row][col];
 	}
 
+	public normalizeAsVectorList(): Matrix {
+		const result = Matrix.createNull(this.rows + 1, this.cols);
+
+		for (let r = 0; r < this.rows; r++) {
+			for (let c = 0; c < this.cols; c++) {
+				result.m[r][c] = this.m[r][c];
+			}
+		}
+
+		for (let c = 0; c < this.cols; c++) {
+			result.m[result.rows - 1][c] = 1;
+		}
+
+		return result;
+	}
+
 	public normalize(): Matrix {
 		const result = Matrix.createNull(this.rows + 1, this.cols + 1);
 
@@ -79,6 +95,22 @@ class Matrix {
 			for (let bc = 0; bc < b.cols; bc++) {
 				for (let i = 0; i < a.cols; i++) {
 					result.m[ar][bc] += a.m[ar][i] * b.m[i][bc];
+				}
+			}
+		}
+
+		return result;
+	}
+
+	public static specialMult(a: Matrix, b: Matrix): Matrix {
+		if (a.cols !== b.rows) throw new Error('');
+
+		const result = Matrix.createNull(b.rows, b.cols);
+
+		for (let bc = 0; bc < b.cols; bc++) {
+			for (let br = 0; br < b.rows; br++) {
+				for (let ac = 0; ac < a.cols; ac++) {
+					result.m[br][bc] += a.m[br][ac] * b.m[ac][bc];
 				}
 			}
 		}
