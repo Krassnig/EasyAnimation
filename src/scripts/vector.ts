@@ -2,7 +2,7 @@ import Matrix from "./matrix";
 
 export class Vector extends Matrix {
     protected constructor(vector: number[]) {
-        super([vector], 1, vector.length);
+        super([vector], 1,  vector.length);
     }
 
     public homogenize(): Vector {
@@ -32,7 +32,7 @@ export class Vector extends Matrix {
 }
 
 export class Vector2D extends Vector {
-    private constructor(vector2D: number[]) {
+    private constructor(vector2D: [number, number]) {
         super(vector2D);
     }
 
