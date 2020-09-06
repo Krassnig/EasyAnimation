@@ -16,7 +16,7 @@ export class Animator {
 	private shape: Shape;
 	private tstack: [Matrix, number][];
 	private mnext: Matrix;
-
+	private preview: Boolean = false;
 	public translate(x: number, y: number): Animator {
 		this.mnext = Matrix.mult(Matrix.create([
 			[1, 0, x],
@@ -43,7 +43,10 @@ export class Animator {
 		]), this.mnext);
 		return this;
 	}
-
+	public showPreview(): Animator{
+		this.preview = true;
+		return this;
+	}
 	public animate(seconds: number): Animator {
 		this.tstack.push([this.mnext, seconds]);
 		this.mnext = Matrix.createIdentity(3);
@@ -51,7 +54,9 @@ export class Animator {
 	}
 
 	public async finalize(): Promise<Animator> {
-		await this.doStep(this.shape.toVectorList(), this.tstack[0]);
+		const step = this.tstack[0];
+		await this.doStep(this.shape.toVectorList(), step);
+
 		return this;
 	}
 
@@ -67,6 +72,7 @@ export class Animator {
 		for (let f = 0; f < framecount; f++) {
 			this.canvas.clear();
 			this.shape.draw(this.canvas, next);
+			if(this.preview) this.shape.preview(this.canvas, Matrix.specialMult(step[0], this.shape.toVectorList()));
 			next = Matrix.add(next, unit);
 
 			await Task.delay(waitframe);
