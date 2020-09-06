@@ -1,8 +1,8 @@
 import Matrix from "./matrix";
 
 export class Vector extends Matrix {
-    protected constructor(vector: number[][]) {
-        super(vector, 1,  vector[0].length);
+    protected constructor(vector: number[]) {
+        super([vector], 1, vector.length);
     }
 
     public homogenize(): Vector {
@@ -14,21 +14,29 @@ export class Vector extends Matrix {
         return Vector.createVector(result);
     }
 
-    public get(col: number, row: number= 0): number {
-        return super.get(row, col);
+    public get(col: number): number {
+        return super.get(0, col);
     }
 
     public static createVector(vector: number[]): Vector {
-        return new Vector([vector]);
+        return new Vector(vector);
+    }
+
+    public static createVectorList(vectors: number[][]): Vector[] {
+        const result = [];
+        for (let i = 0; i < vectors.length; i++) {
+            result[i] = Vector.createVector(vectors[i]);
+        }
+        return result;
     }
 }
 
 export class Vector2D extends Vector {
-    private constructor(vector2D: number[][]) {
+    private constructor(vector2D: number[]) {
         super(vector2D);
     }
 
     public static createVector2D(x: number, y: number) {
-        return new Vector2D([[x, y]]);
+        return new Vector2D([x, y]);
     }
 }
