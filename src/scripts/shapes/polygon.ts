@@ -4,6 +4,8 @@ import Shape from "./shape";
 import Matrix from "../matrix";
 
 export class Polygon implements Shape {
+    preview(canvas: Canvas, mnext: Matrix): void {
+    }
     toVectorList(): Matrix {
         return Matrix.create(this._points).transpose().normalizeAsVectorList();
     }
