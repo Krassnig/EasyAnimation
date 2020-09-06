@@ -1,5 +1,5 @@
 class Matrix {
-	private constructor(m: number[][], r: number, c: number) {
+	protected constructor(m: number[][], r: number, c: number) {
 		this.m = m;
 		this.rows = r;
 		this.cols = c;
@@ -29,7 +29,7 @@ class Matrix {
 		return result;
 	}
 
-	public normalize(): Matrix {
+	public homogenize(): Matrix {
 		const result = Matrix.createNull(this.rows + 1, this.cols + 1);
 
 		for (let r = 0; r < this.rows; r++) {
