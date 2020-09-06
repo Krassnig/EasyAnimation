@@ -69,7 +69,7 @@ export class Animator {
 		const unit = Matrix.div(b, framecount);
 		let next = start;
 
-		for (let f = 0; f < framecount; f++) {
+		for (let f = 0; f <= framecount; f++) {
 			this.canvas.clear();
 			this.shape.draw(this.canvas, next);
 			if(this.preview) this.shape.preview(this.canvas, Matrix.specialMult(step[0], this.shape.toVectorList()));
